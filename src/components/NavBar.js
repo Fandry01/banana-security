@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import logo from '../assets/banana-01.png';
 import { useNavigate, Link } from 'react-router-dom';
+import {AuthContext} from "../context/AuthContext";
 
 function NavBar() {
   const navigate = useNavigate();
+  const {isAuth, logout, login} = useContext(AuthContext);
+
+  console.log(isAuth);
 
   return (
     <nav>
@@ -19,13 +23,13 @@ function NavBar() {
       <div>
         <button
           type="button"
-          onClick={() => navigate('/signin')}
+          onClick={isAuth ? logout : login}
         >
-          Log in
+            {isAuth ? "logout" : "login"}
         </button>
         <button
           type="button"
-          onClick={() => navigate('/signup')}
+          onClick={()=> navigate('SignUp')}
         >
           Registreren
         </button>
